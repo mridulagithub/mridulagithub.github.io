@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mridula Madabhushanam — Platform & Site Reliability Leader</title>
+<meta name="description" content="Platform Engineering and Site Reliability leader. CNCF Golden Kubestronaut. AWS, Amazon EKS, SLO-driven reliability, FinOps, and AI-driven operations." />
+<link rel="canonical" href="https://mridulagithub.github.io/" />
+
+<!-- Favicon: monogram "M" in the site's accent color -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230C0F17'/%3E%3Ctext x='50' y='72' font-family='monospace' font-size='64' font-weight='700' fill='%237C9CFF' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+
+<!-- Open Graph / social share preview -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://mridulagithub.github.io/" />
+<meta property="og:title" content="Mridula Madabhushanam — Platform & Site Reliability Leader" />
+<meta property="og:description" content="Platform Engineering and Site Reliability leader. CNCF Golden Kubestronaut. AWS, Amazon EKS, SLO-driven reliability, FinOps, and AI-driven operations." />
+<meta property="og:site_name" content="Mridula Madabhushanam" />
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Mridula Madabhushanam — Platform & Site Reliability Leader" />
+<meta name="twitter:description" content="Platform Engineering and Site Reliability leader. CNCF Golden Kubestronaut. AWS, Amazon EKS, SLO-driven reliability, FinOps, and AI-driven operations." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --base:#0C0F17; --panel:#141926; --panel-2:#1B2231; --line:#29324A;
+    --ink:#EAEEF7; --muted:#94A0B8; --faint:#5E6A83;
+    --accent:#7C9CFF; --accent-soft:rgba(124,156,255,.14); --ok:#4ADE80;
+    --display:"Space Grotesk",sans-serif; --body:"Inter",sans-serif; --mono:"IBM Plex Mono",monospace;
+    --wrap:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--base);color:var(--ink);font-family:var(--body);line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+  .mono{font-family:var(--mono)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);font-weight:500}
+
+  /* subtle grid backdrop */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:64px 64px;opacity:.05}
+
+  /* top bar */
+  .topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+    background:rgba(12,15,23,.72);border-bottom:1px solid var(--line)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brandmark{font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--ink);font-weight:500}
+  .brandmark span{color:var(--faint)}
+  .status{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(74,222,128,.6);
+    animation:pulse 2.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.5)}70%{box-shadow:0 0 0 7px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+
+  section{position:relative;z-index:1}
+
+  /* hero */
+  .hero{padding:88px 0 64px}
+  .hero .eyebrow{display:block;margin-bottom:22px}
+  .hero h1{font-family:var(--display);font-weight:600;letter-spacing:-.02em;
+    font-size:clamp(34px,6.2vw,64px);line-height:1.04;max-width:19ch}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero .lede{margin-top:26px;font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:56ch}
+  .cred-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+  .chip{font-family:var(--mono);font-size:12.5px;color:var(--ink);border:1px solid var(--line);
+    background:var(--panel);padding:8px 13px;border-radius:999px;display:inline-flex;align-items:center;gap:8px}
+  .chip b{color:var(--accent);font-weight:600}
+  .chip.gold{border-color:rgba(232,176,75,.5);background:rgba(232,176,75,.08)}
+  .chip.gold::before{content:"★";color:#E8B04B}
+
+  /* readout panel */
+  .readout{margin-top:52px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
+  .readout-head{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid var(--line);
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .readout-head .dot{animation:none}
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr)}
+  .metric{padding:26px 20px;border-right:1px solid var(--line)}
+  .metric:last-child{border-right:none}
+  .metric .val{font-family:var(--display);font-weight:600;font-size:clamp(28px,4.4vw,44px);
+    letter-spacing:-.02em;line-height:1}
+  .metric .val .u{color:var(--accent)}
+  .metric .lab{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:11px;line-height:1.45}
+
+  /* section header */
+  .shead{display:flex;align-items:baseline;gap:16px;margin-bottom:36px}
+  .shead .num{font-family:var(--mono);font-size:12px;color:var(--faint)}
+  .shead h2{font-family:var(--display);font-weight:600;font-size:clamp(22px,3vw,30px);letter-spacing:-.01em}
+  .block{padding:78px 0;border-top:1px solid var(--line)}
+
+  /* impact objectives */
+  .obj{display:grid;grid-template-columns:1fr;gap:14px}
+  .objcard{border:1px solid var(--line);border-radius:13px;background:var(--panel);padding:24px 26px;
+    display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;transition:border-color .25s,transform .25s}
+  .objcard:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .objcard .otag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:9px}
+  .objcard .odesc{color:var(--ink);font-size:15.5px;max-width:62ch}
+  .objcard .odesc .sub{color:var(--muted);display:block;margin-top:5px;font-size:14px}
+  .result{text-align:right;white-space:nowrap}
+  .result .rv{font-family:var(--display);font-weight:700;font-size:clamp(30px,5vw,46px);line-height:.95;
+    letter-spacing:-.02em;color:var(--accent)}
+  .result .rl{font-family:var(--mono);font-size:11px;color:var(--faint);text-transform:uppercase;
+    letter-spacing:.12em;margin-top:7px}
+
+  /* capabilities */
+  .caps{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .capcard{border:1px solid var(--line);border-radius:13px;background:var(--panel);padding:24px}
+  .capcard h3{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);font-weight:500;margin-bottom:15px}
+  .taglist{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:13px;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:5px 10px;
+    background:var(--panel-2)}
+
+  /* case studies */
+  .cases{display:grid;grid-template-columns:1fr;gap:16px}
+  .case{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:30px 32px}
+  .case .ct{font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:-.01em;margin-bottom:6px}
+  .case .cmeta{font-family:var(--mono);font-size:11.5px;color:var(--accent);letter-spacing:.1em;
+    text-transform:uppercase;margin-bottom:18px}
+  .case p{color:var(--muted);font-size:15px;margin-bottom:12px}
+  .case p b{color:var(--ink);font-weight:600}
+  .case p:last-child{margin-bottom:0}
+
+  /* recognition */
+  .rec{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
+  .goldcard{border:1px solid rgba(232,176,75,.4);border-radius:14px;background:
+    linear-gradient(160deg,rgba(232,176,75,.10),rgba(232,176,75,.02));padding:32px}
+  .goldcard .badge{font-size:34px;line-height:1}
+  .goldcard h3{font-family:var(--display);font-weight:600;font-size:22px;margin:16px 0 10px}
+  .goldcard p{color:var(--muted);font-size:15px}
+  .sidecard{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:28px}
+  .sidecard h3{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);font-weight:500;margin-bottom:16px}
+  .li{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+  .li:last-child{border-bottom:none}
+  .li .k{font-family:var(--mono);font-size:11px;color:var(--faint);min-width:74px;padding-top:3px;
+    text-transform:uppercase;letter-spacing:.08em}
+
+  /* contact */
+  .contact{padding:78px 0 40px;border-top:1px solid var(--line)}
+  .contact h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4vw,40px);
+    letter-spacing:-.02em;max-width:20ch}
+  .clinks{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .clink{border:1px solid var(--line);border-radius:10px;padding:14px 20px;background:var(--panel);
+    font-family:var(--mono);font-size:13.5px;display:inline-flex;align-items:center;gap:10px;
+    transition:border-color .2s,color .2s}
+  .clink:hover{border-color:var(--accent);color:var(--accent)}
+  .clink .ar{color:var(--faint)}
+  footer{border-top:1px solid var(--line);padding:26px 0;font-family:var(--mono);font-size:11.5px;
+    color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  /* reveal (JS-gated: content is fully visible without JS) */
+  .js .rv-anim{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .js .rv-anim.in{opacity:1;transform:none}
+
+  @media (max-width:860px){
+    .metrics{grid-template-columns:repeat(2,1fr)}
+    .metric:nth-child(2){border-right:none}
+    .metric:nth-child(1),.metric:nth-child(2){border-bottom:1px solid var(--line)}
+    .caps{grid-template-columns:1fr}
+    .rec{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    .objcard{grid-template-columns:1fr;gap:16px}
+    .result{text-align:left}
+    .status .txt{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .js .rv-anim{opacity:1;transform:none;transition:none}
+    .dot{animation:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mridula Madabhushanam",
+  "url": "https://mridulagithub.github.io/",
+  "jobTitle": "Platform & Site Reliability Leader",
+  "description": "Platform Engineering and Site Reliability leader. CNCF Golden Kubestronaut. AWS, Amazon EKS, SLO-driven reliability, FinOps, and AI-driven operations.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Dallas",
+    "addressRegion": "TX",
+    "addressCountry": "US"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Villanova University"
+  },
+  "email": "mailto:talk2mridula@gmail.com",
+  "sameAs": [
+    "https://www.linkedin.com/in/mridulam27/",
+    "https://github.com/mridulagithub"
+  ],
+  "knowsAbout": [
+    "Platform Engineering",
+    "Site Reliability Engineering",
+    "Amazon EKS",
+    "Kubernetes",
+    "Amazon Web Services",
+    "FinOps",
+    "Observability",
+    "AIOps"
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brandmark">mridula<span>.platform</span></div>
+    <div class="status"><span class="dot"></span><span class="txt">Open to Director / Head of Platform roles</span></div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Platform · Site Reliability · Cloud-Native</span>
+    <h1>I build the platforms engineers <em>ship fast</em> on — and <em>trust</em>.</h1>
+    <p class="lede">Platform Engineering and Site Reliability leader. I design highly available, resilient cloud infrastructure on AWS and Amazon EKS — and build the teams and operating disciplines that keep it running. Reporting to the head of technology, I own platform and reliability for the whole engineering organization.</p>
+    <div class="cred-row">
+      <span class="chip gold">CNCF Golden Kubestronaut</span>
+      <span class="chip"><b>20+</b> yrs in infrastructure</span>
+      <span class="chip">AWS · Amazon EKS · Kubernetes</span>
+      <span class="chip">SLOs · FinOps · AIOps</span>
+    </div>
+
+    <div class="readout rv-anim">
+      <div class="readout-head"><span class="dot" style="background:var(--accent)"></span>Platform impact · current tenure</div>
+      <div class="metrics">
+        <div class="metric"><div class="val" data-count="35" data-suffix="%" data-prefix="−"><span>−35</span><span class="u">%</span></div><div class="lab">cloud infrastructure<br>spend</div></div>
+        <div class="metric"><div class="val" data-count="80" data-suffix="%" data-prefix="−"><span>−80</span><span class="u">%</span></div><div class="lab">mean time to<br>resolution (MTTR)</div></div>
+        <div class="metric"><div class="val" data-count="77" data-suffix="%" data-prefix="−"><span>−77</span><span class="u">%</span></div><div class="lab">deployment<br>workflow time</div></div>
+        <div class="metric"><div class="val">SOC 2<span class="u"> II</span></div><div class="lab">Type II<br>certification led</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="shead"><span class="num">01</span><h2>Objectives &amp; results</h2></div>
+    <div class="obj">
+      <div class="objcard rv-anim">
+        <div><div class="otag">Objective · Cost</div><div class="odesc">Bring cloud spend under control without slowing engineering.<span class="sub">Cluster right-sizing, Spot / Karpenter integration, and a FinOps discipline built with executive leadership.</span></div></div>
+        <div class="result"><div class="rv">−35%</div><div class="rl">infra spend</div></div>
+      </div>
+      <div class="objcard rv-anim">
+        <div><div class="otag">Objective · Reliability</div><div class="odesc">Cut the time to detect and resolve production incidents.<span class="sub">Standardized observability on Prometheus / Grafana and migrated incident response to incident.io with rigorous post-incident review.</span></div></div>
+        <div class="result"><div class="rv">−80%</div><div class="rl">MTTR</div></div>
+      </div>
+      <div class="objcard rv-anim">
+        <div><div class="otag">Objective · Velocity</div><div class="odesc">Make production deployment fast, safe, and on-demand.<span class="sub">Rebuilt CI/CD so a deploy that took 40 minutes now runs in under 10.</span></div></div>
+        <div class="result"><div class="rv">−77%</div><div class="rl">deploy time</div></div>
+      </div>
+      <div class="objcard rv-anim">
+        <div><div class="otag">Objective · Scale</div><div class="odesc">Run a resilient multi-account platform across environments.<span class="sub">Own architecture for 5 production-grade EKS clusters across 3 environments in a multi-account AWS footprint.</span></div></div>
+        <div class="result"><div class="rv">5×3</div><div class="rl">clusters × envs</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="shead"><span class="num">02</span><h2>What I work in</h2></div>
+    <div class="caps">
+      <div class="capcard rv-anim"><h3>Cloud &amp; Containers</h3><div class="taglist">
+        <span class="tag">AWS</span><span class="tag">Amazon EKS</span><span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">Karpenter</span><span class="tag">Helm</span><span class="tag">Linux</span></div></div>
+      <div class="capcard rv-anim"><h3>IaC &amp; GitOps</h3><div class="taglist">
+        <span class="tag">Terraform</span><span class="tag">GitHub Actions</span><span class="tag">ArgoCD / FluxCD</span><span class="tag">KEDA</span><span class="tag">ExternalSecrets</span></div></div>
+      <div class="capcard rv-anim"><h3>Reliability &amp; Observability</h3><div class="taglist">
+        <span class="tag">SLIs / SLOs</span><span class="tag">Error budgets</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">OpenTelemetry</span><span class="tag">incident.io</span></div></div>
+      <div class="capcard rv-anim"><h3>AI Infrastructure</h3><div class="taglist">
+        <span class="tag">Model Context Protocol (MCP)</span><span class="tag">AI agent orchestration</span><span class="tag">Natural-language infra tooling</span></div></div>
+      <div class="capcard rv-anim"><h3>Data &amp; Messaging</h3><div class="taglist">
+        <span class="tag">Redpanda</span><span class="tag">Debezium</span><span class="tag">Snowflake</span><span class="tag">Omni BI</span><span class="tag">Redshift</span></div></div>
+      <div class="capcard rv-anim"><h3>Leadership &amp; Governance</h3><div class="taglist">
+        <span class="tag">SRE org design</span><span class="tag">FinOps</span><span class="tag">SOC 2 Type II</span><span class="tag">Incident response</span><span class="tag">Zero-trust access</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="shead"><span class="num">03</span><h2>Selected work</h2></div>
+    <div class="cases">
+      <div class="case rv-anim">
+        <div class="ct">Natural-language infrastructure, in Slack</div>
+        <div class="cmeta">AI Ops · Kubernetes · GitHub · AWS</div>
+        <p><b>Problem.</b> Engineers lost time context-switching into consoles to answer routine questions about infrastructure state.</p>
+        <p><b>What I built.</b> An AI-powered Slack bot that answers plain-English questions about Kubernetes, GitHub, and AWS and returns results directly in the channel — read-only by design, so it informs without taking actions.</p>
+        <p><b>Result.</b> Routine investigation became a quick question instead of a console dive, meeting engineers where they already work.</p>
+      </div>
+      <div class="case rv-anim">
+        <div class="ct">Reliability as an operating model</div>
+        <div class="cmeta">SLOs · Observability · Incident response</div>
+        <p><b>Problem.</b> Incident response was slow and inconsistent, with no shared reliability language across teams.</p>
+        <p><b>What I did.</b> Introduced SLIs, SLOs, KPIs, and error budgets; standardized observability on Prometheus / Grafana; migrated incident management to incident.io with disciplined post-incident analysis.</p>
+        <p><b>Result.</b> <b>80% reduction in MTTR</b> and a reliability practice the whole organization shares.</p>
+      </div>
+      <div class="case rv-anim">
+        <div class="ct">A platform ready for audit</div>
+        <div class="cmeta">Governance · Security · Zero-trust</div>
+        <p><b>Problem.</b> Achieving SOC 2 Type II required provable governance across the platform and its access paths.</p>
+        <p><b>What I did.</b> Led platform readiness, technical auditing, and governance; engineered Just-In-Time production database and VPN access to enforce zero-trust while keeping support fast.</p>
+        <p><b>Result.</b> <b>SOC 2 Type II certification</b> achieved, with access controls that accelerate rather than block engineers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="shead"><span class="num">04</span><h2>Recognition &amp; community</h2></div>
+    <div class="rec">
+      <div class="goldcard rv-anim">
+        <div class="badge">★</div>
+        <h3>CNCF Golden Kubestronaut</h3>
+        <p>The highest tier of distinction in the Cloud Native Computing Foundation and Linux Foundation ecosystem, earned by holding every active performance-based certification — among the earliest recipients globally. Engaged across the CNCF and KubeCon cloud-native community.</p>
+      </div>
+      <div class="sidecard rv-anim">
+        <h3>Details</h3>
+        <div class="li"><span class="k">Education</span><span>M.S. Electrical Engineering — Villanova University</span></div>
+        <div class="li"><span class="k">Based in</span><span>Dallas, TX · open to remote</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <span class="eyebrow">Get in touch</span>
+    <h2 style="margin-top:18px">Let's talk platforms, reliability, and where AI earns its keep.</h2>
+    <div class="clinks">
+      <a class="clink" href="mailto:talk2mridula@gmail.com">talk2mridula@gmail.com <span class="ar">↗</span></a>
+      <a class="clink" href="Mridula-Madabhushanam-Resume.pdf" target="_blank" rel="noopener">Résumé (PDF) <span class="ar">↗</span></a>
+      <a class="clink" href="https://www.linkedin.com/in/mridulam27/" target="_blank" rel="noopener">LinkedIn <span class="ar">↗</span></a>
+      <a class="clink" href="https://github.com/mridulagithub" target="_blank" rel="noopener">GitHub <span class="ar">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;width:100%">
+    <span>Mridula Madabhushanam — Platform &amp; Site Reliability Leader</span>
+    <span>Built as a living document · update freely</span>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+  // Reveal on scroll
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  var items = document.querySelectorAll('.rv-anim');
+  items.forEach(function(el){ io.observe(el); });
+  // Failsafe: never leave content hidden
+  setTimeout(function(){ items.forEach(function(el){ el.classList.add('in'); }); }, 2600);
+
+  // Count-up for hero metrics (respects reduced motion)
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function countUp(el){
+    var target = parseInt(el.getAttribute('data-count'),10);
+    var prefix = el.getAttribute('data-prefix')||'';
+    var suffix = el.getAttribute('data-suffix')||'';
+    if(reduce){ el.innerHTML = prefix + target + '<span class="u">'+suffix+'</span>'; return; }
+    var start=null, dur=1100;
+    function step(ts){
+      if(!start) start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      var val=Math.round((1-Math.pow(1-p,3))*target);
+      el.innerHTML = prefix + val + '<span class="u">'+suffix+'</span>';
+      if(p<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var mio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.querySelectorAll('.val[data-count]').forEach(countUp); mio.unobserve(e.target); }
+    });
+  }, {threshold:.4});
+  var readout=document.querySelector('.readout'); if(readout) mio.observe(readout);
+</script>
+</body>
+</html>
